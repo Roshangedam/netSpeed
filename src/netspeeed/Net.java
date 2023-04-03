@@ -5,7 +5,10 @@
 package netspeeed;
 
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import oshi.SystemInfo;
+import oshi.hardware.NetworkIF;
 
 
 /**
@@ -20,8 +23,8 @@ public class Net {
     public Float cupSpeed=new Float(0.0000);
     private Boolean flag=true;
     SystemInfo si= new SystemInfo();
-    Long sentData1=new Long(0);;
-    Long recvData1=new Long(0);;
+    Long sentData1=new Long(0);
+    Long recvData1=new Long(0);
     Long totalSentData;
     Long totalRecvData;
     public Boolean getFlag() {
@@ -33,9 +36,10 @@ public class Net {
     }
  
     public void update() throws InterruptedException {
-
+       ExecutorService executor = Executors.newFixedThreadPool(2);
+        
         while (flag) {
-            
+
           
             totalSentData = (sentData - sentData1);
             totalRecvData = (recvData - recvData1);
@@ -44,16 +48,21 @@ public class Net {
             upSpeed = totalSentData.floatValue() / Float.valueOf(1024);
             downSpeed = totalRecvData.floatValue() / Float.valueOf(1024);
             Thread.sleep(1000);
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    
-                    sentData=(si.getHardware().getNetworkIFs().get(0).getBytesSent()/1024);
-                    recvData=(si.getHardware().getNetworkIFs().get(0).getBytesRecv()/1024);
-                   
+            executor.execute(() ->{
+             
+                int connectedIFsIndex = 0;
+                for (NetworkIF x : si.getHardware().getNetworkIFs()) {
+                    if (!x.isConnectorPresent()) {
+                        connectedIFsIndex++;
+                    }
                 }
+                
+                    sentData=(si.getHardware().getNetworkIFs().get(connectedIFsIndex).getBytesSent()/1024);
+                    recvData=(si.getHardware().getNetworkIFs().get(connectedIFsIndex).getBytesRecv()/1024);
+                   
+                
 
-            }).start();
+            });
         }
 
     }

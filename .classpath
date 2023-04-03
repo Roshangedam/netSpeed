@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="dist/lib/jna-5.12.1.jar"/>
+	<classpathentry kind="lib" path="dist/lib/jna-platform-5.12.1.jar"/>
+	<classpathentry kind="lib" path="dist/lib/oshi-core-6.2.1.jar"/>
+	<classpathentry kind="lib" path="dist/lib/slf4j-api-1.7.36.jar"/>
+	<classpathentry kind="lib" path="dist/NetSpeeed.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
