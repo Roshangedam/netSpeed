@@ -5,13 +5,9 @@
 package netspeeed;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.*;
-import javax.swing.*;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
@@ -45,35 +41,25 @@ class FrameDragListener extends MouseAdapter {
 
 public class Main extends JFrame {
 
-    public Main() {
-        final Net net = new Net();
-        new Thread (() ->{
-       
-                try {
-                    net.update();
-                } catch (InterruptedException ex) {
-                }
-            
-        }).start();
+    final JLabel upSpeed = new JLabel();
+    final JLabel kbps1 = new JLabel();
+    final JLabel downSpeed = new JLabel();
+    final JLabel kbps2 = new JLabel();
+    final Net net = new Net();
+    FrameDragListener frameDragListener = new FrameDragListener(this);
 
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+    public Main() throws InterruptedException {
+
         setLocation(1200, 10);
         setUndecorated(true);
-        //setIconImage(new ImageIcon("icon.png").getImage());
         setSize(200, 200);
         setBackground(new Color(0, 0, 0, 0));
         setAlwaysOnTop(true);
-        setType(Type.UTILITY); 
-        FrameDragListener frameDragListener = new FrameDragListener(this);
+        setType(Type.UTILITY);
         addMouseListener(frameDragListener);
         addMouseMotionListener(frameDragListener);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        final JLabel upSpeed = new JLabel();
-        final JLabel kbps1 = new JLabel();
-        final JLabel downSpeed = new JLabel();
-        final JLabel kbps2 = new JLabel();
-        
-        
+
         add(kbps2);
         add(upSpeed);
         add(kbps1);
@@ -83,47 +69,41 @@ public class Main extends JFrame {
         kbps1.setBounds(30, 50, 100, 100);
         upSpeed.setBounds(80, 50, 100, 100);
         kbps2.setBounds(110, 50, 100, 100);
-
-        new Thread(()->{
-                try {
-                    while (net.getFlag()) {
-
-                        try {
-                            if (net.downSpeed.intValue() != 0) {
-                                downSpeed.setText(net.downSpeed.toString().substring(0, 3) );
-                                kbps1.setText("mbps ↓");                             
-                            } else {
-                                downSpeed.setText(net.downSpeed.toString().substring(2, 5));
-                                kbps1.setText("kbps ↓");                    
-                            }
-                        } catch (Exception e) {
-                            downSpeed.setText(net.downSpeed.toString().substring(2));                           
-                            kbps1.setText("kbps ↓");
-                        }
-                        try {
-                            if (net.upSpeed.intValue() != 0) {
-                             
-                                upSpeed.setText(net.upSpeed.toString().substring(0, 3) );                           
-                                kbps2.setText("mbps ↑");
-                            } else {
-                                upSpeed.setText(net.upSpeed.toString().substring(2, 5));
-                                kbps2.setText("kbps ↑");
-                            }
-                        } catch (Exception e) {
-                            upSpeed.setText(net.upSpeed.toString().substring(2));
-                            kbps2.setText("kbps ↑");
-                        }
-
-                    }
-                } catch (Exception ex) {
-                }
-            
-        }).start();
-
         setVisible(true);
+
+        while (true) {
+            net.update();
+            try {
+                if (net.downSpeed.intValue() != 0) {
+                    downSpeed.setText(net.downSpeed.toString().substring(0, 3));
+                    kbps1.setText("mbps ↓");
+                } else {
+                    downSpeed.setText(net.downSpeed.toString().substring(2, 5));
+                    kbps1.setText("kbps ↓");
+                }
+            } catch (Exception e) {
+                downSpeed.setText(net.downSpeed.toString().substring(2));
+                kbps1.setText("kbps ↓");
+            }
+            try {
+                if (net.upSpeed.intValue() != 0) {
+
+                    upSpeed.setText(net.upSpeed.toString().substring(0, 3));
+                    kbps2.setText("mbps ↑");
+                } else {
+                    upSpeed.setText(net.upSpeed.toString().substring(2, 5));
+                    kbps2.setText("kbps ↑");
+                }
+            } catch (Exception e) {
+                upSpeed.setText(net.upSpeed.toString().substring(2));
+                kbps2.setText("kbps ↑");
+            }
+            Thread.sleep(1000);
+        }
+
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         new Main();
     }
 }
