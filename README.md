@@ -8,10 +8,10 @@ NetSpeed App is a real-time internet speed meter designed to provide you with li
 - **Compatibility:** Compatible with Windows 32-bit and 64-bit systems.
 
 ## Download NetSpeed App 📥
-Experience the power of real-time internet speed monitoring by downloading NetSpeed App from [SourceForge]([https://lnkd.in/dK2w-iQJ](https://sourceforge.net/projects/netspeed/)).
+Experience the power of real-time internet speed monitoring by downloading NetSpeed App from [SourceForge](https://sourceforge.net/projects/netspeed/).
 
 ## Explore the Source Code 🔍
-NetSpeed App is open-source! Dive into the source code on GitHub to understand its workings and contribute to its development: [NetSpeed App Source Code]([https://lnkd.in/dtmd7cDp](https://sourceforge.net/projects/netspeed/)).
+NetSpeed App is open-source! Dive into the source code on GitHub to understand its workings and contribute to its development: [NetSpeed App Source Code](https://github.com/Roshangedam/netSpeed).
 
 ## Getting Started 🚀
 1. Clone the repository: `git clone https://github.com/Roshangedam/NetSpeed-App.git`
