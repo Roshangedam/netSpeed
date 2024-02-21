@@ -14,7 +14,7 @@ Experience the power of real-time internet speed monitoring by downloading NetSp
 NetSpeed App is open-source! Dive into the source code on GitHub to understand its workings and contribute to its development: [NetSpeed App Source Code](https://github.com/Roshangedam/netSpeed).
 
 ## Getting Started 🚀
-1. Clone the repository: `git clone https://github.com/Roshangedam/NetSpeed-App.git](https://github.com/Roshangedam/netSpeed.git`
+1. Clone the repository: `git clone https://github.com/Roshangedam/netSpeed.git`
 2. Open the project in your preferred IDE.
 3. Run the application.
 
