@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="file://dist/lib/jna-5.12.1.jar" />
+    <libelement value="file://dist/lib/jna-platform-5.12.1.jar" />
+    <libelement value="file://dist/lib/oshi-core-6.2.1.jar" />
+    <libelement value="file://dist/lib/slf4j-api-1.7.36.jar" />
+    <libelement value="file://dist/NetSpeeed.jar" />
+    <src_description expected_position="1">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="1" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/build/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="jna-5.12.1.jar">
+        <CLASSES>
+          <root url="file://dist/lib/jna-5.12.1.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jna-platform-5.12.1.jar">
+        <CLASSES>
+          <root url="file://dist/lib/jna-platform-5.12.1.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="oshi-core-6.2.1.jar">
+        <CLASSES>
+          <root url="file://dist/lib/oshi-core-6.2.1.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="slf4j-api-1.7.36.jar">
+        <CLASSES>
+          <root url="file://dist/lib/slf4j-api-1.7.36.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="NetSpeeed.jar">
+        <CLASSES>
+          <root url="file://dist/NetSpeeed.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="oshi-core-6.4.1" level="project" />
+    <orderEntry type="library" name="jna-5.13.0" level="project" />
+    <orderEntry type="library" name="jna-platform-5.13.0" level="project" />
+    <orderEntry type="library" name="slf4j-api-2.0.7" level="project" />
+  </component>
+</module>

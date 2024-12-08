@@ -9,42 +9,55 @@ import java.util.concurrent.Executors;
 import oshi.SystemInfo;
 import oshi.hardware.NetworkIF;
 
-/**
- *
- * @author rgedam
- */
 public class Net {
 
-    public Long sentData = new Long(0);
-    public Long recvData = new Long(0);
-    public Float downSpeed = new Float(0.0000);
-    public Float upSpeed = new Float(0.0000);
-    public Float cupSpeed = new Float(0.0000);
+    public Long sentData = 0L;
+    public Long recvData = 0L;
+    public Float downSpeed = 0.0f;
+    public Float upSpeed = 0.0f;
 
     SystemInfo si = new SystemInfo();
-    Long sentData1 = new Long(0);
-    Long recvData1 = new Long(0);
+    Long sentData1 = 0L;
+    Long recvData1 = 0L;
     Long totalSentData;
     Long totalRecvData;
 
     public void update() throws InterruptedException {
-
+        // Calculate the difference in data sent and received
         totalSentData = (sentData - sentData1);
         totalRecvData = (recvData - recvData1);
         recvData1 = recvData;
         sentData1 = sentData;
-        upSpeed = totalSentData.floatValue() / Float.valueOf(1024);
-        downSpeed = totalRecvData.floatValue() / Float.valueOf(1024);
 
-        int connectedIFsIndex = 0;
-        for (NetworkIF x : si.getHardware().getNetworkIFs()) {
-            if (!x.isConnectorPresent()) {
-                connectedIFsIndex++;
+        // Convert to KB/s
+        upSpeed = totalSentData.floatValue() / 1024;
+        downSpeed = totalRecvData.floatValue() / 1024;
+
+        // Reset sentData and recvData
+        sentData = 0L;
+        recvData = 0L;
+
+        // Iterate over all network interfaces (Ethernet and WiFi)
+        for (NetworkIF netIF : si.getHardware().getNetworkIFs()) {
+            // Check for connected interfaces (ignore disconnected ones)
+            if (netIF.isConnectorPresent()) {
+                String displayName = netIF.getDisplayName().toLowerCase();
+
+                // Check if the interface is WiFi or Ethernet
+                if (displayName.contains("wi-fi") || displayName.contains("wlan")) {
+                    System.out.println("WiFi interface detected: " + displayName);
+                } else if (displayName.contains("ethernet") || displayName.contains("eth")) {
+                    System.out.println("Ethernet interface detected: " + displayName);
+                }
+
+                // Add data sent and received by this interface
+                sentData += netIF.getBytesSent();
+                recvData += netIF.getBytesRecv();
             }
         }
 
-        sentData = (si.getHardware().getNetworkIFs().get(connectedIFsIndex).getBytesSent() / 1024);
-        recvData = (si.getHardware().getNetworkIFs().get(connectedIFsIndex).getBytesRecv() / 1024);
-
+        // Convert total sent/recv to KB
+        sentData /= 1024;
+        recvData /= 1024;
     }
 }
